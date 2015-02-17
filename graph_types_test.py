@@ -5,8 +5,8 @@ import unittest
 # Test classes for testing abstract class members.
 class TestNode(graph_types.NodeType):
 
-    def __init__(self, id):
-        self._id = id
+    def __init__(self, node_id):
+        self._id = node_id
 
     def id(self):
         return self._id

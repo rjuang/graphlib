@@ -84,9 +84,9 @@ class GraphType(object):
 
 class FactoryType(object):
     """Interface for a graph factory for components of a graph."""
-    def create_node(self, id):
+    def create_node(self, node_id):
         """Create a node with the specified id.
-        :param id: id of node.
+        :param node_id: id of node.
         :return: node instance associated with the specified id
         """
         raise NotImplementedError('create_node not implemented')
@@ -111,11 +111,11 @@ class FactoryType(object):
 class BuilderType(object):
     """Interface for a graph builder."""
 
-    def node(self, id):
+    def node(self, node_id):
         """Returns node associated with the specified id.
 
         If no such instance exists, constructs one before returning.
-        :param id: id of node to construct.
+        :param node_id: id of node to construct.
         :return: node associated with specified id.
         """
         raise NotImplementedError('node not implemented.')

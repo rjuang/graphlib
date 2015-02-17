@@ -16,12 +16,12 @@ class Builder(graph_types.BuilderType):
         self._edges = {}
 
     # @Override
-    def node(self, id):
-        if id in self._nodes:
-            return self._nodes[id]
+    def node(self, node_id):
+        if node_id in self._nodes:
+            return self._nodes[node_id]
 
-        node = self._factory.create_node(id)
-        self._nodes[id] = node
+        node = self._factory.create_node(node_id)
+        self._nodes[node_id] = node
         return node
 
     # @Override
@@ -43,25 +43,25 @@ class Builder(graph_types.BuilderType):
         return self._factory.create_graph(nodes, edges)
 
 
-def from_string(factory, str):
+def from_string(factory, str_graph):
     """Construct a graph from a string specifier.
     "A->B->C, B->C, D -> E, E -> F, G, H"
 
     :param factory graph factory instance to use to construct graph.
-    :param str string describing graph to construct.
+    :param str_graph string describing graph to construct.
     :return: a graph.
     """
 
     builder = Builder(factory)
-    node_sequences = [s.split('->') for s in str.split(",")]
+    node_sequences = [s.split('->') for s in str_graph.split(",")]
 
     for seq in node_sequences:
         last_id = None
         for s in seq:
-            id = s.strip()
-            builder.node(id)
+            node_id = s.strip()
+            builder.node(node_id)
             if last_id is not None:
-                builder.edge(last_id, id)
-            last_id = id
+                builder.edge(last_id, node_id)
+            last_id = node_id
 
     return builder.build()
